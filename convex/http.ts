@@ -76,6 +76,7 @@ http.route({
             email: result.data.email_addresses[0]?.email_address,
             name: formatName(result.data.first_name, result.data.last_name),
             profileImage: result.data.image_url,
+            onboardingCompleted: false,
           });
           break;
         case 'user.updated':

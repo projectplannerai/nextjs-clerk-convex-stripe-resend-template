@@ -37,6 +37,7 @@ export const createUser = internalMutation({
     email: v.string(),
     name: v.string(),
     profileImage: v.string(),
+    onboardingCompleted: v.boolean(),
   },
   handler: async (ctx, args) => {
     let user = await ctx.db
@@ -50,6 +51,7 @@ export const createUser = internalMutation({
         userId: args.userId,
         email: args.email,
         profileImage: args.profileImage,
+        onboardingCompleted: args.onboardingCompleted,
       });
     }
   },
@@ -218,5 +220,34 @@ export const isPremium = query({
     }
 
     return isUserPremium(user);
+  },
+});
+
+export const updateUserOnboardingCompleted = mutation({
+  args: {},
+  async handler(ctx, args) {
+    // Get the userId of the current user
+    const userId = await getUserId(ctx);
+    console.log('userId', userId);
+    // Check if there is a userId
+    if (!userId) {
+      throw new ConvexError('You must be logged in.');
+    }
+
+    // Check if the user exists in the database
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_userId', (q) => q.eq('userId', userId))
+      .first();
+
+    // If the user doesn't exist, throw an error
+    if (!user) {
+      throw new ConvexError('User not found');
+    }
+
+    // The update the onboardingCompleted field to true
+    await ctx.db.patch(user._id, {
+      onboardingCompleted: true,
+    });
   },
 });

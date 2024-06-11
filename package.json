@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "next dev --turbo",
+    "dev:backend": "convex dev --typecheck=disable",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,7 +15,9 @@
     "@clerk/clerk-sdk-node": "^5.0.9",
     "@clerk/nextjs": "^5.1.2",
     "@clerk/themes": "^2.1.7",
+    "@hookform/resolvers": "^3.6.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-email/components": "^0.0.18",
     "@tanstack/react-query": "^5.37.1",
@@ -24,13 +28,16 @@
     "next": "14.2.3",
     "next-docs-mdx": "^7.1.2",
     "next-themes": "^0.3.0",
+    "npm-run-all": "^4.1.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.51.5",
     "resend": "^3.2.0",
     "stripe": "^15.8.0",
     "svix": "^1.24.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

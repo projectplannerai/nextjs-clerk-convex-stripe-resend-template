@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MainLayout({
+export default function OnboardingLayout({
   children,
 }: {
   children: React.ReactNode;

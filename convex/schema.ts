@@ -9,6 +9,7 @@ export default defineSchema({
     subscriptionId: v.optional(v.string()),
     profileImage: v.optional(v.string()),
     endsOn: v.optional(v.number()),
+    onboardingCompleted: v.boolean(),
   })
     .index('by_userId', ['userId'])
     .index('by_email', ['email'])
